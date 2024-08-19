@@ -1,6 +1,4 @@
 from flask import render_template, request
-
-jogadores = []
 productsIt = [{'Nome' : 'Ubuntu', 'Ano' : 2011, 'Categoria' : 'Servidor'}]
 
 def init_app(app):
@@ -10,14 +8,11 @@ def init_app(app):
 
     @app.route('/produtos', methods=['GET', 'POST'])
     def produtos():
-        game = productsIt[0]
+
         
-        if request.method == 'POST':
-            if request.form.get('jogador'):
-                jogadores.append(request.form.get('jogador'))
+       
         return render_template('produtos.html',
-                                game=game,
-                                jogadores=jogadores)
+                                products=productsIt)
         
     @app.route('/products_cad', methods=['GET', 'POST'])
     def products_cad():

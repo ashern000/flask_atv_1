@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <div id="loading-screen" style="display: none;">
+        <div class="spinner"></div>
+    </div>
     <h2>Cadastro de produtos de infra</h2>
  
-    <form action="{{url_for('products_cad')}}" method="POST">
+    <form id="productForm" action="{{url_for('products_cad')}}" method="POST" onsubmit="showLoadingScreen()">
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="nome">Nome:</label>
@@ -24,7 +27,7 @@
     <br>
  
     <h4>Produtos cadastrados:</h4>
-    <table  class="table table-bordered">
+    <table class="table table-bordered">
         <tr>
             <th style="width: 100px;">Nome:</th>
             <th style="width: 100px;">Ano:</th>
@@ -38,5 +41,17 @@
             <td>{{product.Categoria}}</td>
         </tr>
     {% endfor %}     
-</table>
+    </table>
+    <script>
+        function showLoadingScreen(event) {
+            event.preventDefault(); // Impede o envio imediato do formulário
+            document.getElementById('loading-screen').style.display = 'flex';
+    
+            // Espera 1 segundo antes de enviar o formulário
+            setTimeout(function() {
+                document.getElementById('productForm').submit();
+            }, 1000); // 1000 milissegundos = 1 segundo
+        }
+    </script>
 {% endblock content %}
+

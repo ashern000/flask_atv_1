@@ -1,19 +1,33 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="container mt-4">
+    <div id="loading-screen">
+        <div class="spinner"></div>
+    </div>
+    <div class="container mt-4" id="main-content" style="display: none;">
         <h2 class="text-center">Página sobre produtos</h2>
         <hr>
         <p><strong>Produtos cadastrados recentemente:</strong></p>
         <div class="accordion" id="productAccordion">
-            {% for k, v in game.items() %}
+            {% for product in products %}
                 <details class="mb-3">
-                    <summary class="btn btn-link">{{ k }}</summary>
+                    <summary class="btn btn-link">{{ product.Nome }}</summary>
                     <div class="card card-body">
-                        {{ v }}
+                        <p><strong>Ano:</strong> {{ product.Ano }}</p>
+                        <p><strong>Categoria:</strong> {{ product.Categoria }}</p>
                     </div>
                 </details>
             {% endfor %}
         </div>
         <hr>
     </div>
+
+    <script defer>
+        
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loading-screen').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+            }, 1000); // 1000 milissegundos = 1 segundo
+        });
+    </script>
 {% endblock content %}
