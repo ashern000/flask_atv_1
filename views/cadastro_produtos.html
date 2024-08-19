@@ -6,7 +6,7 @@
     </div>
     <h2>Cadastro de produtos de infra</h2>
  
-    <form id="productForm" action="{{url_for('products_cad')}}" method="POST" onsubmit="showLoadingScreen()">
+    <form id="productForm" action="{{url_for('products_cad')}}" method="POST" onsubmit="showLoadingScreen(event)">
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="nome">Nome:</label>
@@ -42,16 +42,14 @@
         </tr>
     {% endfor %}     
     </table>
-    <script>
+    <script defer>
         function showLoadingScreen(event) {
-            event.preventDefault(); // Impede o envio imediato do formulário
+            event.preventDefault(); 
             document.getElementById('loading-screen').style.display = 'flex';
     
-            // Espera 1 segundo antes de enviar o formulário
             setTimeout(function() {
                 document.getElementById('productForm').submit();
-            }, 1000); // 1000 milissegundos = 1 segundo
+            }, 1500); // 2000 milissegundos = 2 segundos
         }
     </script>
 {% endblock content %}
-
